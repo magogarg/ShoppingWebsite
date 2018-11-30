@@ -18,12 +18,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
-		<attributes>
-			<attribute name="test" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -35,7 +29,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/vishal_m4/Downloads/Microsoft JDBC Driver 7.0 for SQL Server/sqljdbc_7.0/enu/mssql-jdbc-7.0.0.jre8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/vishal_m4/Downloads/Microsoft JDBC Driver 7.0 for SQL Server/sqljdbc_7.0/enu/mssql-jdbc-7.0.0.jre10.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,12 +1,13 @@
 package com.shoppingcart.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,11 +36,13 @@ public class Product {
 
 	@Column(name = "delivery_duration")
 	private String deliveryDuration;
-
-	 @ManyToOne()
-	 @JoinColumn(name="product_category")
-	 private ProductCategory productCategory;
-
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_category")
+	private ProductCategory productCategory;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "product_category")
 	public ProductCategory getProductCategory() {
 		return productCategory;
 	}
