@@ -2,6 +2,8 @@ package com.shoppingcart.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +45,15 @@ public class AppController {
 		return userService.addUser(user);
 	}
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public String loginUser(@RequestBody User user) {
-		return userService.login(user);
+	public String loginUser(@RequestBody User user,HttpSession httpSession) {
+		return userService.login(user,httpSession);
+	}
+	@RequestMapping(value="/addcart/{id}")
+	public String addCart(@PathVariable("id") int id,HttpSession httpSession) {
+		String userName="";
+		if(httpSession.getAttribute("username")!=null) {
+			userName=httpSession.getAttribute("username").toString();
+		}
+		return userService.addCart(id,userName);
 	}
 }

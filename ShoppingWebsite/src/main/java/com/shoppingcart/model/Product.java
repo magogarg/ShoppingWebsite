@@ -29,7 +29,7 @@ public class Product {
 	private int productPrice;
 
 	@Column(name = "product_stock")
-	private String productStock;
+	private int productStock;
 
 	@Column(name = "product_image")
 	private String productImage;
@@ -83,11 +83,11 @@ public class Product {
 		this.productPrice = productPrice;
 	}
 
-	public String getProductStock() {
+	public int getProductStock() {
 		return productStock;
 	}
 
-	public void setProductStock(String productStock) {
+	public void setProductStock(int productStock) {
 		this.productStock = productStock;
 	}
 

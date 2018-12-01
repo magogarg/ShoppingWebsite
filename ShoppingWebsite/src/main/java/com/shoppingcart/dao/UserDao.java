@@ -20,4 +20,6 @@ public interface UserDao extends CrudRepository<User, Integer> {
 	
 	@Query("SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM User u WHERE u.password = :password")
 	public boolean existsByPassword(@Param("password") String password);
+	
+	public User findByEmail(String email);
 }
