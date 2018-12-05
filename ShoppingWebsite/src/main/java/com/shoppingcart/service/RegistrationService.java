@@ -1,5 +1,7 @@
 package com.shoppingcart.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -57,7 +59,17 @@ public class RegistrationService {
 			cart.setProduct(product);
 			cart.setUser(user);
 			cartDao.save(cart);
+			System.out.println(cart);
 			return "success";
+		}
+	}
+	public List<Cart> viewCart(String userName){
+		User user=userDao.findByEmail(userName);
+		if(userName.isEmpty()){
+			return null;
+		}
+		else {
+			return cartDao.findByUser(user);
 		}
 	}
 }

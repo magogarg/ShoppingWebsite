@@ -6,17 +6,22 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.shoppingcart.dao.ProductCategoryDao;
 import com.shoppingcart.dao.ProductDao;
+import com.shoppingcart.model.Cart;
 import com.shoppingcart.model.Product;
 import com.shoppingcart.model.ProductCategory;
 import com.shoppingcart.model.User;
 import com.shoppingcart.service.RegistrationService;
 
+@CrossOrigin(origins = { "*" }, maxAge = 3000)
 @Component
 @RestController
 public class AppController {
@@ -24,10 +29,16 @@ public class AppController {
 	ProductDao  productDao;
 	@Autowired 
 	RegistrationService userService;
+	@Autowired 
+	ProductCategoryDao  productCategoryDao;
 	
 	@RequestMapping(value="/")
 	public List<Product> getProductCategories() {
 		return productDao.findAll();
+	}
+	@RequestMapping(value="/categories")
+	public List<ProductCategory> getCategories() {
+		return productCategoryDao.findAll();
 	}
 	
 	@RequestMapping(value="/category/{id}")
@@ -40,7 +51,7 @@ public class AppController {
 	public Product getProductById(@PathVariable("id") int id) {
 		return productDao.findOne(id);
 	}
-	@RequestMapping(value="/register",method = RequestMethod.POST)
+	@RequestMapping(value="/register",method = {RequestMethod.POST,RequestMethod.GET})
 	public String addUser(@RequestBody User user) {
 		return userService.addUser(user);
 	}
@@ -55,5 +66,13 @@ public class AppController {
 			userName=httpSession.getAttribute("username").toString();
 		}
 		return userService.addCart(id,userName);
+	}
+	@RequestMapping(value="/viewcart")
+	public List<Cart> viewCart(HttpSession httpSession) {
+		String userName="";
+		if(httpSession.getAttribute("username")!=null) {
+			userName=httpSession.getAttribute("username").toString();
+		}
+		return userService.viewCart(userName);
 	}
 }
